@@ -3,7 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from .models import Post
 from .models import User
 
-def postlist(requset):
+def getlist(requset):
     if requset.method == 'GET':
+        user = list(User.objects.values())
         post = list(Post.objects.values())
-        return JsonResponse(post, safe=False)
+        
+        return JsonResponse(data=user, safe=False)

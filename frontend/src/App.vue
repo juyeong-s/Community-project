@@ -1,58 +1,91 @@
 <template>
-<div class="main">
-  <div class="header">
-    <img class="logo" alt="Vue logo" src="./assets/logo.png">
-  </div>
-  <div class="content">
-    <button @click="getData">게시물 조회</button>
-    {{ data }}
-    <!-- <PostList /> -->
-    <router-view></router-view>
-    <router-link to="/list" @click="getData"></router-link>
-  </div>
-
-  <div class="footer">
-    <p>footer에요</p>
-  </div>
-</div>
+  <div>
+      <Header class="header" :step="step"></Header>
+      <Content class="content" :step="step" :propsdata="dataList"></Content>
+      <Footer class="footer" :step="step"></Footer>
+    </div>
 </template>
 
 <script>
 import axios from "axios"
-import PostList from './components/PostList.vue'
+// import PostList from './components/PostList.vue'
+import Header from "./components/Header.vue"
+import Content from "./components/Content.vue"
+import Footer from "./components/Footer.vue"
+let url = "http://127.0.0.1:8000/community/getlist/";
 
 export default {
   name: 'App',
   data(){
-    return {
-      userList : []
-    }
+      return{
+        step: 2,
+        dataList : []
+      }
   },
   components: {
-    PostList
+      Header: Header,
+      Content: Content,
+      Footer: Footer
   },
-  methods: {
-    getData(){
-      axios.get("http://127.0.0.1:8000/community/post/")
-      .then((res)=>{
-        for(let i of res.data){
-          this.userList.push({
-            id: i.pk,
-            title: i.fields.title,
-            writer_fk_id: i,
-            content: i.fields.content,
-            created_dt: i.fields.created_dt,
-            modified: i.fields.modified
-          })
-        }
-      })
-      .catch((err)=>{
-        alert(err);
-      })
+  mounted() {
+    axios({
+      method: "GET",
+      url: url 
+    })
+    .then(response => {
+      this.dataList = response.data;
+      console.log(this.dataList)
+    })
+    .catch(response => {
+      console.log("Failed", response);
+    });
+  },
+  methods: {  // CRUD 로직 
+    getUserList() {
+
+    },
+    updateUserList() {
+
+    },
+    deleteUserList() {
+
     }
   }
 }
 </script>
+// export default {
+//   name: 'App',
+//   data(){
+//     return {
+//       userList : []
+//     }
+//   },
+//   components: {
+//     header: Header,
+//     content: Content,
+//     footer: Footer,
+//   },
+//   methods: {
+//     getData(){
+//       axios.get("http://127.0.0.1:8000/community/post/")
+//       .then((res)=>{
+//         for(let i of res.data){
+//           this.userList.push({
+//             id: i.pk,
+//             title: i.fields.title,
+//             writer_fk_id: i,
+//             content: i.fields.content,
+//             created_dt: i.fields.created_dt,
+//             modified: i.fields.modified
+//           })
+//         }
+//       })
+//       .catch((err)=>{
+//         alert(err);
+// })
+//     }
+//   }
+// }
 
 <style>
 #app {
@@ -62,19 +95,18 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-.main{
+.header{
   text-align: center;
 }
-.logo{
-  width: 80px;
-  height: 80px;
+.content{
+  background-color: #d1f6ff
 }
-/* .content{
-} */
 .footer{
   background-color: rgb(209, 247, 194);
   width: 100%;
+  height: 5%;
   position: absolute;
   bottom: 1%;
+  text-align: center;
 }
 </style>

@@ -1,30 +1,35 @@
 <template>
-    <div>
-    <h4>게시판 리스트</h4>
     <div class="post-content">
         <ul class="post-head">
-          <li>글 제목</li>
-          <li>글 내용</li>
-          <li>작성일</li>
+          <li><router-link to="/detail/index">{{ data.title }}</router-link></li>
+          <li>{{ data.content }}</li>
+          <li>{{ data.created_dt }}</li>
         </ul>
-        <PostDetail />
     </div>
-  </div>
 </template>
 
 <script>
-import PostDetail from './PostDetail'
 
 export default {
   name: 'PostList',
+  props:{
+    data : Array
+  },
   components: {
-    PostDetail
+  },
+  methods:{
+    Showpost(){
+
+    }
   }
 
 }
 </script>
 
 <style>
+/* .post-content{
+  width: 100%;
+} */
 .post-head{
   list-style: none;
   display: inline-flex;

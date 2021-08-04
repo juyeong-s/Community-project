@@ -16,7 +16,7 @@ export default {
 <style>
 .post-item{
     list-style: none;
-    display: inline-flex;
+    /* display: inline-flex; */
 }
 .post-item li {
     margin-right: 100px;

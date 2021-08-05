@@ -2,9 +2,18 @@
     <div>
         <v-container fluid>
             <v-layout column>
-                <div v-if="step == 2">
-                    <h3 class="content-header">게시판 리스트</h3>
-                
+                <div v-if="step == 0">
+                    <h3 class="content-header">게시판 리스트</h3>         
+                    <v-btn
+                        class="ma-2"
+                        outlined
+                        large
+                        fab
+                        color="teal"
+                        @click="$store.commit('stepchange',2)"
+                    >
+                        <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
                     <div class="post-content">
                         <ul class="post-head">
                             <li>제목</li>
@@ -12,25 +21,16 @@
                             <li>작성일</li>
                         </ul>
                     </div>
-                    <v-list-item v-for="(data, index) in propsdata" v-bind:key="index">
-                        <router-view class="post-list" :data="data"></router-view>
-                    </v-list-item>
+                        <PostList class="post-list" :postlist="postlist" :step="step"></PostList>
                 </div>
 
-                <div v-else-if="step == 3">
+                <div v-else-if="step == 1">
                     <PostDetail />
                 </div>
 
-            <v-flex class="userList" column>
-                    <v-card max-width="600" tile>
-                        <v-list-item v-for="(data, index) in propsdata" v-bind:key="index">
-                            <v-list-item-content>
-                                <v-list-item-title>제목 {{ data.title }}</v-list-item-title>
-                                <v-list-item-subtitle>내용 : {{ data.content }}</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                </v-flex>
+                <div v-else-if="step == 2">
+                    <PostForm />
+                </div>
 
             </v-layout>
         </v-container>
@@ -40,15 +40,17 @@
 <script>
 import PostDetail from './PostDetail.vue'
 import PostList from './PostList.vue'
+import PostForm from './PostForm.vue'
 export default {
     name: 'Content',
     props:{
         step: Number,
-        propsdata: Array
+        postlist: Array
     },
     component:{
         PostDetail,
-        PostList
+        PostList,
+        PostForm
     }
 };
 </script>
@@ -72,4 +74,5 @@ export default {
     width: 100%;
     background-color: rgb(152, 136, 243);
 }
+
 </style>

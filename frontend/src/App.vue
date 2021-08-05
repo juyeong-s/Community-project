@@ -1,8 +1,8 @@
 <template>
   <div>
-      <Header class="header" :step="step"></Header>
-      <Content class="content" :step="step" :propsdata="dataList"></Content>
-      <Footer class="footer" :step="step"></Footer>
+      <Header class="header"></Header>
+      <Content class="content" :step="step" :postlist="postlist" @stepchange="step=2"></Content>
+      <Footer class="footer"></Footer>
     </div>
 </template>
 
@@ -12,14 +12,16 @@ import axios from "axios"
 import Header from "./components/Header.vue"
 import Content from "./components/Content.vue"
 import Footer from "./components/Footer.vue"
-let url = "http://127.0.0.1:8000/community/getlist/";
+let posturl = "http://127.0.0.1:8000/community/getPostlist/";
+let userurl = "http://127.0.0.1:8000/community/getUserlist/";
 
 export default {
   name: 'App',
   data(){
       return{
-        step: 2,
-        dataList : []
+        step: 0,
+        postlist : [],
+        userlist: []
       }
   },
   components: {
@@ -30,11 +32,23 @@ export default {
   mounted() {
     axios({
       method: "GET",
-      url: url 
+      url: posturl 
     })
     .then(response => {
-      this.dataList = response.data;
-      console.log(this.dataList)
+      this.postlist = response.data;
+      console.log(this.postlist)
+    })
+    .catch(response => {
+      console.log("Failed", response);
+    });
+
+    axios({
+      method: "GET",
+      url: userurl 
+    })
+    .then(response => {
+      this.userlist = response.data;
+      console.log(this.userlist)
     })
     .catch(response => {
       console.log("Failed", response);

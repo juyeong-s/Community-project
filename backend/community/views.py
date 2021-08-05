@@ -7,26 +7,27 @@ from .models import Post
 from .models import User
 from .forms import PostForm
 
-def getlist(requset):
-    users = User.objects.all()
+def getPostlist(request):
+    # users = User.objects.all()
     posts = Post.objects.all()
     # user_list = []
     # post_list = []
-    if requset.method == 'GET':
+    if request.method == 'GET':
         # users = list(User.objects.values())
         posts = list(Post.objects.values())
-    data = list(posts)
-    # data.append(posts)
-    # for index, user in enumerate(users, start=1):
-    #     user_list.append({'id':index, 'UserID':user.UserID, 'UserPW':user.UserPW})
+    postdata = list(posts)
+
+    return JsonResponse(postdata, safe=False)
+
+def getUserlist(request):
+    # users = User.objects.all()
+    if request.method == 'GET':
+        # users = list(User.objects.values())
+        users = list(User.objects.values())
         
-    # for index, post in enumerate(posts, start=1):
-    #     post_list.append({'id':index, 'title':post.title, 'writer_fk':post.writer_fk, 'content':post.content, 'created_dt':post.created_dt, 'modified':post.modified}.decode('utf8'))
-    # post_list = list(post_list.values())
-    # data = {user_list,post_list}
-    # print(data)
-    # data.append(user_list)
-    return JsonResponse(data, safe=False)
+    userdata = list(users)
+
+    return JsonResponse(userdata, safe=False)
 
 @require_POST   # POST 메서드로 접근 시에만 동작
 def post_save(request):

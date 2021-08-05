@@ -6,10 +6,7 @@
 
 <script>
 export default {
-    name: 'Header',
-    props:{
-        step: Number
-    }
+    name: 'Header'
 };
 </script>
 

@@ -9,9 +9,10 @@ const store = new Vuex.Store({
   },
   mutations: {
       stepchange(state,n){
-          state.step=n
+        state.step=n
+        console.log(state.step)
       }
   }
-})
+});
 
-export default store
+export default store;

@@ -1,6 +1,7 @@
 from django.db.models import deletion
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import json
 from django.views.decorators.http import require_POST
 from .models import Post
@@ -24,13 +25,14 @@ def getUserlist(request):
     if request.method == 'GET':
         # users = list(User.objects.values())
         users = list(User.objects.values())
-        
+
     userdata = list(users)
 
     return JsonResponse(userdata, safe=False)
 
-@require_POST   # POST 메서드로 접근 시에만 동작
-def post_save(request):
+@csrf_exempt
+# @require_POST   # POST 메서드로 접근 시에만 동작
+def postsave(request):
     if request.body:
         data = json.load(request.body)
         if 'posts' in data:

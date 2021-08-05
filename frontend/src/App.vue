@@ -1,7 +1,7 @@
 <template>
   <div>
       <Header class="header"></Header>
-      <Content class="content" :step="step" :postlist="postlist" @stepchange="step=2"></Content>
+      <Content class="content" :postlist="postlist"></Content>
       <Footer class="footer"></Footer>
     </div>
 </template>
@@ -19,7 +19,6 @@ export default {
   name: 'App',
   data(){
       return{
-        step: 0,
         postlist : [],
         userlist: []
       }
@@ -67,39 +66,6 @@ export default {
   }
 }
 </script>
-// export default {
-//   name: 'App',
-//   data(){
-//     return {
-//       userList : []
-//     }
-//   },
-//   components: {
-//     header: Header,
-//     content: Content,
-//     footer: Footer,
-//   },
-//   methods: {
-//     getData(){
-//       axios.get("http://127.0.0.1:8000/community/post/")
-//       .then((res)=>{
-//         for(let i of res.data){
-//           this.userList.push({
-//             id: i.pk,
-//             title: i.fields.title,
-//             writer_fk_id: i,
-//             content: i.fields.content,
-//             created_dt: i.fields.created_dt,
-//             modified: i.fields.modified
-//           })
-//         }
-//       })
-//       .catch((err)=>{
-//         alert(err);
-// })
-//     }
-//   }
-// }
 
 <style>
 #app {
@@ -110,11 +76,9 @@ export default {
   color: #2c3e50;
 }
 .header{
-  text-align: center;
+  /* text-align: center; */
 }
-.content{
-  background-color: #d1f6ff
-}
+
 .footer{
   background-color: rgb(209, 247, 194);
   width: 100%;

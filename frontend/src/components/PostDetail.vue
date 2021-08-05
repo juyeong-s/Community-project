@@ -1,9 +1,10 @@
 <template>
-  <div class="post-list">
-      <ul class="post-item">
-          <li>{{ post.title }}</li>
-          <li>{{ post.content }}</li>
-          <li>{{ post.created_dt }}</li>
+  <div>
+      바보
+      <ul>
+          <li>{{ posts.title }}</li>
+          <li>{{ posts.content }}</li>
+          <li>{{ posts.created_dt }}</li>
       </ul>
   </div>
 </template>
@@ -11,18 +12,17 @@
 <script>
 export default {
     props: {
-        post: Object,
-        index: Number
+        posts: Object,
     }
 }
 </script>
 
 <style>
-.post-item{
+ul{
     list-style: none;
     /* display: inline-flex; */
 }
-.post-item li {
+li {
     margin-right: 100px;
 }
 

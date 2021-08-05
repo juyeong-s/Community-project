@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PostList from '@/components/PostList'
-import PostDetail from '@/components/PostDetail'
-import PostForm from '@/components/PostForm'
+import PostList from '../components/PostList.vue'
+import PostDetail from '../components/PostDetail.vue'
+import PostForm from '../components/PostForm.vue'
 
 Vue.use(Router)
 
@@ -12,7 +12,6 @@ export default new Router({
       path: '/list',
       name: 'PostList',
       component: PostList,
-      props: true
     },
     {
       path: '/detail/:id',

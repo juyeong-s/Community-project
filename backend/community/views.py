@@ -31,16 +31,26 @@ def getUserlist(request):
     return JsonResponse(userdata, safe=False)
 
 @csrf_exempt
-# @require_POST   # POST 메서드로 접근 시에만 동작
-def postsave(request):
+@require_POST   # POST 메서드로 접근 시에만 동작
+def postsave(request, *args, **kwargs):
+    print(123)
     if request.body:
-        data = json.load(request.body)
-        if 'posts' in data:
-            posts = data['posts']
-            Post.objects.all().delete()
-            for post in posts:
-                print('post',post)
-                form = PostForm(post)
-                if form.is_valid():
-                    form.save() # DB에 저장
-    return JsonResponse({})
+        print(request.body.decode('utf-8'))
+        data = request.body.decode('utf-8')
+        print(type(data))
+        print(data.title)
+        post = json.loads(data)
+        print(post)
+        # data = json.load(body_unicod)
+        # if 'title' in data:
+        #     posts = data["title"]
+            # Post.objects.all().delete()
+            # for post in posts:
+            #     print('post',post)
+        form = PostForm(post)
+        print(form)
+        if form.is_valid():
+            print('saved')
+            form.save() # DB에 저장
+
+    return HttpResponse('success')

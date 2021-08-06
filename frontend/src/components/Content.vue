@@ -11,7 +11,7 @@
            <router-view />
        </div>
        <div v-if="$store.state.step == 2">
-           <PostForm />
+           <PostForm :postlist="postlist"/>
        </div>
     </div>
 </template>

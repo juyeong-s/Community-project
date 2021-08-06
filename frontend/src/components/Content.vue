@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="form/" @click="$store.commit('stepchange',2)"><v-icon>mdi-pencil</v-icon></router-link>
+        <router-link :to="{ name: 'PostForm'}" @click="$store.commit('stepchange',2)"><v-icon>mdi-pencil</v-icon></router-link>
        <div v-if="$store.state.step == 0">
            <div>
                <router-view :postlist="postlist" />

@@ -12,7 +12,7 @@
         style="overflow-y: scroll"
         height="400"
         v-model="form.content"></v-textarea>
-    <router-link to="/list" class="mr-4" @click="submit">올리기</router-link>
+    <v-btn class="mr-4" @click="submit">올리기</v-btn>
     </v-form>
   </v-container>
   

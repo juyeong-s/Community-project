@@ -1,12 +1,11 @@
-from django.db.models import deletion
-from django.shortcuts import render
+# from django.db.models import deletion
+# from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.views.decorators.http import require_POST
 from .models import Post
 from .models import User
-from .forms import PostForm
 
 def getPostlist(request):
     # users = User.objects.all()
@@ -32,25 +31,18 @@ def getUserlist(request):
 
 @csrf_exempt
 @require_POST   # POST 메서드로 접근 시에만 동작
-def postsave(request, *args, **kwargs):
+def postsave(request):
     print(123)
     if request.body:
-        print(request.body.decode('utf-8'))
         data = request.body.decode('utf-8')
-        print(type(data))
-        print(data.title)
         post = json.loads(data)
-        print(post)
-        # data = json.load(body_unicod)
-        # if 'title' in data:
-        #     posts = data["title"]
-            # Post.objects.all().delete()
-            # for post in posts:
-            #     print('post',post)
-        form = PostForm(post)
-        print(form)
-        if form.is_valid():
-            print('saved')
-            form.save() # DB에 저장
+
+        title = post['title']
+        writer_fk_id = post['writer_fk_id']
+        content = post['content']
+        user = User.objects.get(id=writer_fk_id)
+
+        posts = Post(title=title, writer_fk=user, content=content)
+        posts.save()
 
     return HttpResponse('success')

@@ -16,6 +16,7 @@
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "vue": "^2.5.2",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.0.1",
     "vuetify": "^2.5.8",
     "vuex": "^3.6.2"

@@ -42,27 +42,12 @@ export default {
         console.log(this.form)
         axios.post(url,this.form)
         .then((res)=>{
-          // this.postlist = res.data
-          // this.$emit(res.data)
           console.log(res);
         })
         .catch((error)=>{
           console.log("err", error.response)
         });
 
-        // data =
-        // axios({
-        //   method: "POST",
-        //   url:url,
-        //   data:this.data
-        // })
-        // .then((res)=>{
-        //   this.userlist = res.data
-        //   this.$emit('saved')
-        // })
-        // .catch((error)=>{
-        //   console.log("err", error.response)
-        // });
       }
     }
 
@@ -70,9 +55,9 @@ export default {
 </script>
 
 <style>
-.v-textarea{
-    /* overflow-y: scroll; */
-    /* height: 400px; */
-}
+/* .v-textarea{
+    overflow-y: scroll;
+    height: 400px;
+} */
 
 </style>

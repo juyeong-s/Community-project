@@ -9,7 +9,7 @@
         </router-link>
       </li>
       <li>{{ postlist[i].content }}</li>
-      <li>{{ postlist[i].created_dt }}</li>
+      <li>{{ $moment(postlist[i].created_dt).format('YYYY-MM-DD hh:mm') }}</li>
     </ul>
     </div>
    </div>

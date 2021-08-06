@@ -3,8 +3,7 @@
   <div v-for="(post,i) in postlist" :key="i">
     <ul>
       <li>
-        <router-link :to="{ name: 'PostDetail', params: { id: i }}" 
-          :posts="postlist[i]" @click="$store.commit('stepchange',1)">
+        <router-link :to="{ name: 'PostDetail', params: { id: i, post: postlist }}">
           {{ post.title }}
         </router-link>
       </li>

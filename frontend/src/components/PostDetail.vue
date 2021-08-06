@@ -1,20 +1,22 @@
 <template>
   <div>
-      바보
+      {{$route.params.id}}
       <ul>
-          <li>{{ posts.title }}</li>
-          <li>{{ posts.content }}</li>
-          <li>{{ posts.created_dt }}</li>
+          <li>{{ post[$route.params.id].title }}</li>
+          <li>{{ post[$route.params.id].content }}</li>
+          <li>{{ post[$route.params.id].created_dt }}</li>
       </ul>
   </div>
 </template>
 
 <script>
 export default {
+    name: 'PostDetail',
     props: {
-        posts: Object,
+        post: Array,
     }
 }
+
 </script>
 
 <style>

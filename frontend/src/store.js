@@ -8,8 +8,8 @@ const store = new Vuex.Store({
       step: 0
   },
   mutations: {
-      stepchange(state,n){
-        state.step=n
+      changestep(state,n){
+        state.step=n;
         console.log(state.step)
       }
   }

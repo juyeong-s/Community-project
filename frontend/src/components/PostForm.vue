@@ -12,7 +12,7 @@
         style="overflow-y: scroll"
         height="400"
         v-model="form.content"></v-textarea>
-    <v-btn class="mr-4" @click="submit">올리기</v-btn>
+    <router-link to="/list" class="mr-4" @click="submit">올리기</router-link>
     </v-form>
   </v-container>
   
@@ -38,7 +38,7 @@ export default {
     },
     methods: {
       submit(){
-        this.$store.commit('stepchange',1)
+        // this.$store.commit('changestep',1)
         console.log(this.form)
         axios.post(url,this.form)
         .then((res)=>{

@@ -12,6 +12,7 @@ export default new Router({
       path: '/list',
       name: 'PostList',
       component: PostList,
+      props: true
     },
     {
       path: '/detail/:id',

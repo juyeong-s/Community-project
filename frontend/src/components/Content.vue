@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <router-link :to="{ name: 'PostForm'}" @click="$store.commit('stepchange',2)"><v-icon>mdi-pencil</v-icon></router-link>
+    <div>  
        <div v-if="$store.state.step == 0">
+           <router-link :to="{ name: 'PostForm'}" @click.native="changepage"><v-icon>mdi-pencil</v-icon></router-link>
            <div>
                <router-view :postlist="postlist" />
+           </div>
+           <div class="text-center">
+                <Pagination />
            </div>
        </div>
        
@@ -20,6 +23,8 @@
 import PostDetail from './PostDetail.vue'
 import PostList from './PostList.vue'
 import PostForm from './PostForm.vue'
+import Pagination from './Pagination.vue'
+import store from '../store';
 
 export default {
     name: 'Content',
@@ -30,6 +35,12 @@ export default {
         PostForm,
         PostDetail,
         PostList,
+        Pagination
+    },
+    methods:{
+        changepage(){
+            store.commit("stepchange",2);
+        }
     }
 };
 </script>

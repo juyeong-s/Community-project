@@ -54,15 +54,15 @@ export default {
     });
   },
   methods: {  // CRUD 로직 
-    getUserList() {
+    // getUserList() {
 
-    },
-    updateUserList() {
+    // },
+    // updateUserList() {
 
-    },
-    deleteUserList() {
+    // },
+    // deleteUserList() {
 
-    }
+    // }
   }
 }
 </script>
@@ -82,9 +82,8 @@ export default {
 .footer{
   background-color: rgb(209, 247, 194);
   width: 100%;
-  height: 5%;
-  position: absolute;
-  bottom: 1%;
+  height: 60px;
+  margin: 1% auto;
   text-align: center;
 }
 </style>

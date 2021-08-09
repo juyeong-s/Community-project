@@ -8,7 +8,7 @@
         </router-link>
       </li>
       <li>{{ postlist[i].content }}</li>
-      <li>{{ postlist[i].writer_fk_id }}</li>
+      <li>{{ userlist[i] }}</li>
       <li>{{ $moment(postlist[i].created_dt).format('YYYY-MM-DD hh:mm') }}</li>
     </ul>
     </div>
@@ -20,7 +20,8 @@
 export default {
   name: 'PostList',
   props:{
-    postlist : Array
+    postlist : Array,
+    userlist: Array
   },
 
 }

@@ -1,7 +1,8 @@
 <template>
   <div>
+    {{username}}
       <Header class="header"></Header>
-      <Content class="content" :postlist="postlist"></Content>
+      <Content class="content" :postlist="postlist" :userlist="userlist"></Content>
       <Footer class="footer"></Footer>
     </div>
 </template>
@@ -20,7 +21,8 @@ export default {
   data(){
       return{
         postlist : [],
-        userlist: []
+        userlist: [],
+        username: []
       }
   },
   components: {

@@ -3,7 +3,7 @@
        <div v-if="$store.state.step == 0">
            <router-link :to="{ name: 'PostForm'}" @click.native="changepage"><v-icon>mdi-pencil</v-icon></router-link>
            <div>
-               <router-view :postlist="postlist" />
+               <router-view :postlist="postlist" :userlist="userlist"/>
            </div>
            <div class="text-center">
                 <Pagination />
@@ -29,7 +29,8 @@ import store from '../store';
 export default {
     name: 'Content',
     props:{
-        postlist: Array
+        postlist: Array,
+        userlist: Array
     },
     components:{
         PostForm,
@@ -41,7 +42,8 @@ export default {
         changepage(){
             store.commit("stepchange",2);
         }
-    }
+    },
+
 };
 </script>
 

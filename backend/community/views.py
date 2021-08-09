@@ -1,5 +1,6 @@
 # from django.db.models import deletion
 # from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -60,3 +61,22 @@ def postsave(request):
         posts.save()
 
     return HttpResponse('success')
+
+def pagedpostlist(request, id):
+    postlist = list(Post.objects.values())
+    paginator = Paginator(postlist, 10)
+    print(paginator)
+    page = request.GET.get('page')
+    print(page)
+    try:
+        post = paginator.page(page)
+        print(1)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        post = paginator.page(id)
+        print(2)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        post = paginator.page(paginator.num_pages)
+        print(3)
+    return HttpResponse(post)

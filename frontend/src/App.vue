@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{username}}
+    {{pagedpostlist}}
       <Header class="header"></Header>
       <Content class="content" :postlist="postlist" :userlist="userlist"></Content>
       <Footer class="footer"></Footer>
@@ -22,7 +22,8 @@ export default {
       return{
         postlist : [],
         userlist: [],
-        username: []
+        perpagepost: 10,
+        pagedpostlist: []
       }
   },
   components: {
@@ -31,13 +32,32 @@ export default {
       Footer: Footer
   },
   mounted() {
+    let pagedposturl = ""
+    for(let id=1; id<=Math.ceil(this.postlist.length/this.perpagepost); id++){
+      if(pagedposturl){
+        pagedposturl = "http://127.0.0.1:8000/community/getPostlist/"+id;
+      
+        axios({
+          method: "GET",
+          url: pagedposturl 
+        })
+        .then(response => {
+          this.pagedpostlist = response.data;
+          console.log(this.pagedpostlist) 
+        })
+        .catch(response => {
+          console.log("Failed", response);
+        });
+      }
+    }
+
     axios({
       method: "GET",
       url: posturl 
     })
     .then(response => {
       this.postlist = response.data;
-      console.log(this.postlist)
+      console.log(this.postlist) 
     })
     .catch(response => {
       console.log("Failed", response);

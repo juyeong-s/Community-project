@@ -6,7 +6,12 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import store  from './store.js'
 import VueMoment from 'vue-moment'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(VueMoment);
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 // app.use(store).mount('#app')
 
 Vue.config.productionTip = false

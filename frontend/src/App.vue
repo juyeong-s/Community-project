@@ -15,6 +15,7 @@ import Content from "./components/Content.vue"
 import Footer from "./components/Footer.vue"
 let posturl = "http://127.0.0.1:8000/community/getPostlist/";
 let userurl = "http://127.0.0.1:8000/community/getUserlist/";
+let pagedposturl = "http://127.0.0.1:8000/community/pagedpostlist/1"
 
 export default {
   name: 'App',
@@ -32,24 +33,45 @@ export default {
       Footer: Footer
   },
   mounted() {
-    let pagedposturl = ""
-    for(let id=1; id<=Math.ceil(this.postlist.length/this.perpagepost); id++){
-      if(pagedposturl){
-        pagedposturl = "http://127.0.0.1:8000/community/getPostlist/"+id;
+    // this.emitter.on('postpage',(x)=>{
+    //   // let pagedposturl = "http://127.0.0.1:8000/community/pagedpostlist/1"
+    //   // for(let x=1; x<=Math.ceil(this.postlist.length/this.perpagepost); x++){
+    //   // if(pagedposturl){
+    //     console.log(11)
+    //     pagedposturl = "http://127.0.0.1:8000/community/pagedpostlist/"+x;
       
-        axios({
-          method: "GET",
-          url: pagedposturl 
-        })
-        .then(response => {
-          this.pagedpostlist = response.data;
-          console.log(this.pagedpostlist) 
-        })
-        .catch(response => {
-          console.log("Failed", response);
-        });
-      }
-    }
+    //     axios({
+    //       method: "GET",
+    //       url: pagedposturl 
+    //     })
+    //     .then(response => {
+    //       this.pagedpostlist = response.data;
+    //       console.log(this.pagedpostlist) 
+    //     })
+    //     .catch(response => {
+    //       console.log("Failed", response);
+    //     });
+    //   // }
+    // // }
+    // })
+    // let pagedposturl = ""
+    // for(let id=1; id<=Math.ceil(this.postlist.length/this.perpagepost); id++){
+    //   if(pagedposturl){
+    //     pagedposturl = "http://127.0.0.1:8000/community/getPostlist/"+id;
+      
+    //     axios({
+    //       method: "GET",
+    //       url: pagedposturl 
+    //     })
+    //     .then(response => {
+    //       this.pagedpostlist = response.data;
+    //       console.log(this.pagedpostlist) 
+    //     })
+    //     .catch(response => {
+    //       console.log("Failed", response);
+    //     });
+    //   }
+    // }
 
     axios({
       method: "GET",

@@ -1,10 +1,15 @@
 <template>
+<div class="container">
+  <div>
+    <label for="search">Search</label>
+    <input v-model="serach" type="text" @input="searchkeyword" class="search-input">
+  </div>
 <div class="post-list">
   {{pagedpostlist}}
   <table>
   <tbody>
     <tr v-for="(post,i) in paginatedData.slice().reverse()" :key="i">
-      <td>
+      <td class="post-title">
         {{i+1}}
       </td>
       <td>
@@ -12,8 +17,8 @@
           {{ post.title }}
         </router-link>
       </td>
-      <td>{{ post.content }}</td>
-      <td>{{ userlist[postlist.length - i-1] }}</td>
+      <td class="post-content">{{ post.content }}</td>
+      <td class="post-writer">{{ userlist[postlist.length - i-1] }}</td>
       <td>{{ post.view_cnt }}</td>
       <td>{{ $moment(post.created_dt).format('YYYY-MM-DD hh:mm') }}</td>
     </tr>
@@ -22,10 +27,12 @@
   <Pagination :postlist="postlist"/>
  
   </div>
+  </div>  
 </template>
 
 <script>
 import Pagination from './Pagination.vue'
+import EventBus from '../eventBus'
 
 export default {
   name: 'PostList',
@@ -33,7 +40,9 @@ export default {
     return {
       perPage: 10,
       currentPage: 1,
-      pagedpostlist: []
+      pagedpostlist: [],
+      search: '',
+      searchedData: []
     }
   },
   props:{
@@ -41,35 +50,26 @@ export default {
     userlist: Array
   },
   methods:{
-    prevpage(){
-      this.$store.commit('prevpage',1)
-    },
-    nextpage(){
-      this.$store.commit('nextpage',1)
-    },
-    gopage(num){
-      this.$store.commit('gopage',num)
-      let currpage = this.$store.state.currentPage;
-      console.log("list-현재페이지",currpage)
-      // let pagedposturl = "http://127.0.0.1:8000/community/pagedpostlist/"+currpage;
-      console.log(Math.ceil(this.postlist.length/this.perPage))
-      // for(; currpage<=Math.ceil(this.postlist.length/this.perPage); currpage++){
-          let pagedposturl = "http://127.0.0.1:8000/community/pagedpostlist/"+num;
-          console.log("for문 들어옴")
-          axios({
-            method: "GET",
-            url: pagedposturl 
-          })
-          .then(response => {
-            this.pagedpostlist = response.data;
-            console.log(this.pagedpostlist) 
-          })
-          .catch(response => {
-            console.log("Failed", response);
-          });
-      // }
+    searchkeyword(e){
+      this.searchedData = []
+      this.search = e.target.value;
+      console.log(this.search)
+      this.postlist.forEach((post)=>{
+          if(post.title.includes(this.search)){
+              this.searchedData.push(post)
+              console.log(this.searchedData)
+              // EventBus.$emit('searchdata',this.searchedData);
+              // return searchedData
+          }
+      })
     }
   },
+  // created(){
+  //   console.log(1)
+  //   EventBus.$on('searchdata',(payload)=>{
+  //     console.log("받았음",payload);
+  //   });
+  // },
   computed: {
       rows() {
         this.$store.commit('allpagenum',Math.ceil(this.postlist.length/this.perPage))
@@ -82,7 +82,7 @@ export default {
       const start = this.currentPage,
             end = start + this.perPage;
       return this.postlist.slice(start, end);
-    }
+      }
     },
     components:{
       Pagination
@@ -91,6 +91,12 @@ export default {
 </script>
 
 <style>
+.container{
+  background-color: aliceblue;
+}
+.search-input{
+    border: 1px solid black;
+}
 .pagination{
   margin: 80px auto;
 }
@@ -99,12 +105,8 @@ export default {
   height: 500px;
   background-color: rgb(208, 208, 255);
 }
-.post-list-ul{
-  list-style: none;
-  display: flex;
-}
-.post-list-ul li{
-  margin: 0 auto;
+.post-title{
+  color: dimgray;
 }
 .prevbtn{
   width: 40px;

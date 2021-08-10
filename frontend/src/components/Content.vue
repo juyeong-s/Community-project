@@ -2,11 +2,11 @@
     <div>  
        <div v-if="$store.state.step == 0">
            <router-link :to="{ name: 'PostForm'}" @click.native="changepage"><v-icon>mdi-pencil</v-icon></router-link>
-           <input type="text">
            <div>
+               <Search :postlist="postlist"/>
                <!-- Postlist Page -->
                <router-view :postlist="postlist" :userlist="userlist"
-               @postpage="postpage"/>
+               />
            </div>
        </div>
        
@@ -25,6 +25,7 @@
 import PostDetail from './PostDetail.vue'
 import PostList from './PostList.vue'
 import PostForm from './PostForm.vue'
+import Search from './Search.vue'
 import store from '../store';
 
 export default {
@@ -37,6 +38,7 @@ export default {
         PostForm,
         PostDetail,
         PostList,
+        Search
     },
     methods:{
         changepage(){

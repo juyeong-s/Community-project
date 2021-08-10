@@ -10,7 +10,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 // import '@ocrv/vue-tailwind-pagination/styles'
-import mitt from 'mitt'
+
 Vue.use(VueMoment);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
@@ -28,6 +28,5 @@ export default new Vue({
   vuetify,
   store,
   template: '<App/>',
-  // emitter,
   render: h => h(App)
 });

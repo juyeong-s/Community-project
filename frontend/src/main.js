@@ -9,10 +9,14 @@ import VueMoment from 'vue-moment'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import '@ocrv/vue-tailwind-pagination/styles'
+import mitt from 'mitt'
 Vue.use(VueMoment);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 // app.use(store).mount('#app')
+// const emitter = mitt();
+// app.mount('#app')
 
 Vue.config.productionTip = false
 
@@ -24,5 +28,6 @@ export default new Vue({
   vuetify,
   store,
   template: '<App/>',
+  // emitter,
   render: h => h(App)
-}).use(store).$mount('#app')
+});

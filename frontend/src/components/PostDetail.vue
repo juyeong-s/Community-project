@@ -1,10 +1,9 @@
 <template>
   <div class="postdetail">
-      <!-- {{$route.params.id}} -->
-      <ul class="post-detail-ul">
-          <li><strong>제목</strong><br>{{ post[$route.params.id].title }}</li>
-          <li><strong>내용</strong><br> {{ post[$route.params.id].content }}</li>
-          <li><strong>작성일</strong><br> {{ post[$route.params.id].created_dt }}</li>
+        <ul class="post-detail-ul">
+            <li><strong>제목</strong><br>{{ item.title }}</li>
+            <li><strong>내용</strong><br> {{ item.content }}</li>
+            <li><strong>작성일</strong><br> {{ item.created_dt }}</li>
       </ul>
   </div>
 </template>
@@ -13,8 +12,8 @@
 export default {
     name: 'PostDetail',
     props: {
-        post: Array,
-    }
+        item: Object,
+    },
 }
 
 </script>
@@ -32,3 +31,6 @@ export default {
 }
 
 </style>
+
+// <li><strong>내용</strong><br> {{ post[$route.params.id].content }}</li>
+//           <li><strong>작성일</strong><br> {{ post[$route.params.id].created_dt }}</li>

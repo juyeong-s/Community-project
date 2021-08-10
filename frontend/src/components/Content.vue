@@ -2,16 +2,20 @@
     <div>  
        <div v-if="$store.state.step == 0">
            <router-link :to="{ name: 'PostForm'}" @click.native="changepage"><v-icon>mdi-pencil</v-icon></router-link>
+           <input type="text">
            <div>
+               <!-- Postlist Page -->
                <router-view :postlist="postlist" :userlist="userlist"
                @postpage="postpage"/>
            </div>
        </div>
        
        <div v-if="$store.state.step == 1">
-           <router-view />
+           <!-- Detail Page -->
+           <PostDetail />
        </div>
        <div v-if="$store.state.step == 2">
+           <!-- Form Page -->
            <PostForm :postlist="postlist"/>
        </div>
     </div>
@@ -36,11 +40,11 @@ export default {
     },
     methods:{
         changepage(){
-            store.commit("stepchange",2);
+            store.commit("stepchange",{n: 2, item:null});
         },
-        postpage(page){
+        // postpage(page){
             
-        }
+        // }
     },
 
 };

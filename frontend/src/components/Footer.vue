@@ -1,5 +1,5 @@
 <template>
-    <footer>footer에요</footer>
+    <footer>by JuYeong</footer>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
     <div>  
        <div v-if="$store.state.step == 0">
-           <router-link :to="{ name: 'PostForm'}" @click.native="changepage"><v-icon>mdi-pencil</v-icon></router-link>
+           <router-link :to="{ name: 'PostForm'}" @click.native="changepage" class="link-form"><v-icon>mdi-pencil</v-icon></router-link>
            <div>
                <!-- Postlist Page -->
                <router-view :postlist="postlist" :userlist="userlist"
@@ -52,5 +52,7 @@ export default {
 </script>
 
 <style>
-
+.link-form{
+    text-decoration: none;
+}
 </style>

@@ -1,17 +1,8 @@
 <template>
     <header>
-        <div class="header">
-           <h1>VUE-COMMUNITY</h1>
-        </div>
-           <h3 class="content-header">게시판 리스트</h3>
-               
-           <div class="post-content">
-               <ul class="post-head">
-                   <li>제목</li>
-                   <li>글쓴이</li>
-                   <li>작성일</li>
-               </ul>
-           </div>
+        <div class="head">
+           <h2>COMMUNITY</h2>
+        </div>  
     </header>
 </template>
 
@@ -22,24 +13,11 @@ export default {
 </script>
 
 <style>
-.header{
+.head{
     text-align: center;
+    margin: 0 auto;
+    background-color: rgb(253, 205, 150);
+    color: rgb(102, 102, 102);
 }
-.back-btn{
-    float: left;
-}
-.content-header {
-    padding: 10px;
-}
-.post-content{
-    text-align: center;
-    background-color: aquamarine;
-}
-.post-head{
-  list-style: none;
-  display: inline-flex;
-}
-.post-head li {
-  margin: 0 200px;
-}
+
 </style>

@@ -62,6 +62,21 @@ def postsave(request):
 
     return HttpResponse('success')
 
+@csrf_exempt
+@require_POST
+def viewcnt_save(request):
+    print(123)
+    if request.body:
+        data = request.body.decode('utf-8')
+        get_data = json.loads(data)
+
+        post = Post.objects.get(id=get_data["id"])
+        print(post.view_cnt)
+        post.view_cnt = get_data["view_cnt"]
+        post.save()
+
+        return HttpResponse('success')
+
 def pagedpostlist(request, id):
     postlist = list(Post.objects.values())
     paginator = Paginator(postlist, 10)

@@ -1,11 +1,31 @@
 <template>
   <div class="postdetail">
       <router-link :to="{ name: 'Pagination' }" class="back-btn">목록으로</router-link>
-        <ul class="post-detail-ul">
-            <li><strong>제목</strong><br>{{ item.title }}</li>
-            <li><strong>내용</strong><br> {{ item.content }}</li>
-            <li><strong>작성일</strong><br> {{ item.created_dt }}</li>
-      </ul>
+      <table class="detail-table">
+          <tbody>
+              <tr class="detail-tr">
+                    <th class="detail-th">제목</th>
+              </tr>
+              <hr>
+              <tr class="detail-tr">
+                    <td class="detail-td">{{ item.title }}</td>
+              </tr>
+              <tr class="detail-tr">
+                    <th class="detail-th">내용</th>                 
+              </tr>
+              <hr>
+              <tr class="detail-tr">
+                    <td class="detail-td">{{ item.content }}</td>
+              </tr>
+              <tr class="detail-tr">
+                    <th class="detail-th">작성일</th>
+              </tr>
+              <hr>
+              <tr class="detail-tr">
+                    <td class="detail-td">{{ item.created_dt }}</td>
+              </tr>
+          </tbody>
+      </table>
   </div>
 </template>
 
@@ -23,15 +43,16 @@ export default {
 .postdetail{
     margin: 0 auto;
 }
-.post-detail-ul{
-    list-style: none;
-    /* margin: 0 auto; */
+.detail-table{
+    margin: 20px auto;
 }
-.post-detail-ul li {
-    margin: 50px 50px;
+.detail-tr{
+    padding: 50px 0px;
 }
-
+.detail-th{
+    padding: 5px 0px;
+}
+.detail-td{
+    padding: 0px 0 8px 0;
+}
 </style>
-
-// <li><strong>내용</strong><br> {{ post[$route.params.id].content }}</li>
-//           <li><strong>작성일</strong><br> {{ post[$route.params.id].created_dt }}</li>

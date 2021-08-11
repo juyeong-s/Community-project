@@ -1,11 +1,9 @@
 <template>
-<div class="container">
+<div class="post-list">
   <div>
     <label for="search">Search</label>
-    <input v-model="serach" type="text" @input="searchkeyword" class="search-input">
+    <input v-model="serach" type="text" @input="searchkeyword($event.target.value)" class="search-input" placeholder="🔍">
   </div>
-<div class="post-list">
-  {{pagedpostlist}}
   <table>
   <tbody>
     <tr v-for="(post,i) in paginatedData.slice().reverse()" :key="i">
@@ -26,8 +24,7 @@
   </table>
   <Pagination :postlist="postlist"/>
  
-  </div>
-  </div>  
+  </div> 
 </template>
 
 <script>
@@ -51,17 +48,16 @@ export default {
   },
   methods:{
     searchkeyword(e){
-      this.searchedData = []
+      this.searchedData = [...this.postlist]
       this.search = e.target.value;
       console.log(this.search)
-      this.postlist.forEach((post)=>{
-          if(post.title.includes(this.search)){
-              this.searchedData.push(post)
-              console.log(this.searchedData)
-              // EventBus.$emit('searchdata',this.searchedData);
-              // return searchedData
-          }
-      })
+      for(let i=0; i<this.searchedData.length; i++){
+        if(![this.searchedData[i].title].includes(this.search)){
+          this.searchedData.splice(i,1);
+          i--;
+        }
+      }
+      console.log(this.searchedData)
     }
   },
   // created(){
@@ -85,7 +81,7 @@ export default {
       }
     },
     components:{
-      Pagination
+      Pagination,
     }
 }
 </script>
@@ -146,3 +142,8 @@ export default {
   //     <button @click="nextpage" class="nextbtn">다음</button>
   //   </router-link>
   // </div> 
+
+  //   <div>
+  //   <label for="search">Search</label>
+  //   <input v-model="serach" type="text" @input="searchkeyword" class="search-input">
+  // </div>

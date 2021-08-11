@@ -3,7 +3,6 @@
        <div v-if="$store.state.step == 0">
            <router-link :to="{ name: 'PostForm'}" @click.native="changepage"><v-icon>mdi-pencil</v-icon></router-link>
            <div>
-               <Search :postlist="postlist"/>
                <!-- Postlist Page -->
                <router-view :postlist="postlist" :userlist="userlist"
                />

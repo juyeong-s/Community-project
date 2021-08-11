@@ -1,5 +1,6 @@
 <template>
   <div class="postdetail">
+      <router-link :to="{ name: 'Pagination' }" class="back-btn">목록으로</router-link>
         <ul class="post-detail-ul">
             <li><strong>제목</strong><br>{{ item.title }}</li>
             <li><strong>내용</strong><br> {{ item.content }}</li>

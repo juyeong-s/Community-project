@@ -3,7 +3,6 @@
         <div class="header">
            <h1>VUE-COMMUNITY</h1>
         </div>
-            <button class="back-btn" @click="$router.go(-1)">뒤로가기</button>
            <h3 class="content-header">게시판 리스트</h3>
                
            <div class="post-content">

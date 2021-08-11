@@ -16,14 +16,6 @@ export default new Router({
       name: 'Pagination',
       component: Pagination,
       props: true,
-      // children:[
-      //   {
-      //     path: '/detail',
-      //     name: 'PostDetail',
-      //     component: PostDetail,
-      //     props: true
-      //   }
-      // ]
     },
     {
       path: '/detail/:id',
@@ -36,6 +28,6 @@ export default new Router({
       name: 'PostForm',
       component: PostForm,
       props: true
-    }
+    },
   ]
 })

@@ -9,7 +9,6 @@ import VueMoment from 'vue-moment'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import '@ocrv/vue-tailwind-pagination/styles'
 
 Vue.use(VueMoment);
 Vue.use(BootstrapVue)

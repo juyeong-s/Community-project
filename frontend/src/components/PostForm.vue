@@ -14,11 +14,14 @@
         v-model="form.content"></v-textarea>
     <router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link>
     </v-form>
+    <br>
+    <Form />
   </v-container>
   
 </template>
 
 <script>
+import Form from './Form.vue'
 import axios from "axios"
 let url = "http://127.0.0.1:8000/community/postsave/"
 
@@ -49,8 +52,10 @@ export default {
         });
 
       }
+    },
+    components:{
+      Form
     }
-
 }
 </script>
 

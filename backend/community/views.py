@@ -25,6 +25,7 @@ def getPostlist(request):
     if request.method == 'GET':
         # users = list(User.objects.values())
         postdata = list(Post.objects.values())
+        postdata.reverse()
         # userdata = list(User.objects.values('id','UserID'))
         # username = usersearch(postdata,userdata)
     # postdata = list(posts)

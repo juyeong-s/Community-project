@@ -13,9 +13,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(VueMoment);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-// app.use(store).mount('#app')
-// const emitter = mitt();
-// app.mount('#app')
+// Vue.use(Editor)
 
 Vue.config.productionTip = false
 

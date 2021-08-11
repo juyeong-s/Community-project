@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Vuex from 'vuex';
-import PostList from '../components/PostList.vue'
+import Vuex from 'vuex'
+// import PostList from '../components/PostList.vue'
 import Pagination from '../components/Pagination.vue'
 import PostDetail from '../components/PostDetail.vue'
 import PostForm from '../components/PostForm.vue'
@@ -15,7 +15,7 @@ export default new Router({
       path: '/list',
       name: 'Pagination',
       component: Pagination,
-      props: true,
+      props: true
     },
     {
       path: '/detail/:id',
@@ -28,6 +28,6 @@ export default new Router({
       name: 'PostForm',
       component: PostForm,
       props: true
-    },
+    }
   ]
 })

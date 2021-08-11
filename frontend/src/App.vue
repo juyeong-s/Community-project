@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{pagedpostlist}}
       <Header class="header"></Header>
       <Content class="content" :postlist="postlist" :userlist="userlist"></Content>
       <Footer class="footer"></Footer>
@@ -32,46 +31,7 @@ export default {
       Content: Content,
       Footer: Footer
   },
-  mounted() {
-    // this.emitter.on('postpage',(x)=>{
-    //   // let pagedposturl = "http://127.0.0.1:8000/community/pagedpostlist/1"
-    //   // for(let x=1; x<=Math.ceil(this.postlist.length/this.perpagepost); x++){
-    //   // if(pagedposturl){
-    //     console.log(11)
-    //     pagedposturl = "http://127.0.0.1:8000/community/pagedpostlist/"+x;
-      
-    //     axios({
-    //       method: "GET",
-    //       url: pagedposturl 
-    //     })
-    //     .then(response => {
-    //       this.pagedpostlist = response.data;
-    //       console.log(this.pagedpostlist) 
-    //     })
-    //     .catch(response => {
-    //       console.log("Failed", response);
-    //     });
-    //   // }
-    // // }
-    // })
-    // let pagedposturl = ""
-    // for(let id=1; id<=Math.ceil(this.postlist.length/this.perpagepost); id++){
-    //   if(pagedposturl){
-    //     pagedposturl = "http://127.0.0.1:8000/community/getPostlist/"+id;
-      
-    //     axios({
-    //       method: "GET",
-    //       url: pagedposturl 
-    //     })
-    //     .then(response => {
-    //       this.pagedpostlist = response.data;
-    //       console.log(this.pagedpostlist) 
-    //     })
-    //     .catch(response => {
-    //       console.log("Failed", response);
-    //     });
-    //   }
-    // }
+  created() {
 
     axios({
       method: "GET",

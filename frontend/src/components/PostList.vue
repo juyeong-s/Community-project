@@ -15,7 +15,7 @@
           {{ post.title }}
         </router-link>
       </td>
-      <td class="post-content">{{ post.content }}</td>
+      <td class="post-content"><code>{{ displaycontent }}</code></td>
       <td class="post-writer">{{ userlist[postlist.length - i-1] }}</td>
       <td>{{ post.view_cnt }}</td>
       <td>{{ $moment(post.created_dt).format('YYYY-MM-DD hh:mm') }}</td>
@@ -29,7 +29,7 @@
 
 <script>
 import Pagination from './Pagination.vue'
-import EventBus from '../eventBus'
+import PostForm from './PostForm.vue'
 
 export default {
   name: 'PostList',
@@ -58,14 +58,11 @@ export default {
         }
       }
       console.log(this.searchedData)
+    },
+    displaycontent(){
+      return CKEditor.instances.editor1.getData()
     }
   },
-  // created(){
-  //   console.log(1)
-  //   EventBus.$on('searchdata',(payload)=>{
-  //     console.log("받았음",payload);
-  //   });
-  // },
   computed: {
       rows() {
         this.$store.commit('allpagenum',Math.ceil(this.postlist.length/this.perPage))
@@ -82,7 +79,8 @@ export default {
     },
     components:{
       Pagination,
-    }
+      PostForm
+    },
 }
 </script>
 

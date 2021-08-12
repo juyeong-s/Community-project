@@ -4,24 +4,15 @@
     <v-text-field dense="dense" label="제목" 
      v-model="form.title" required></v-text-field>
      <v-text-field label="글쓴이(예비)" v-model="form.writer_fk_id"></v-text-field>
-    <v-textarea
-        name="input-7-1"
-        filled="filled"
-        label="내용"
-        auto-grow="auto-grow"
-        style="overflow-y: scroll"
-        height="400"
-        v-model="form.content"></v-textarea>
+     <ckeditor id="editor1" :value="value"></ckeditor>
     <router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link>
     </v-form>
     <br>
-    <Form />
   </v-container>
   
 </template>
 
 <script>
-import Form from './Form.vue'
 import axios from "axios"
 let url = "http://127.0.0.1:8000/community/postsave/"
 
@@ -33,15 +24,27 @@ export default {
           title: '',
           writer_fk_id: 0,
           content: '',
-        }
+        },
+        instance: null
       }
     },
     props:{
       postlist: Array
     },
+    watch:{
+      value(){
+        let html = this.instance.getData()
+        if (html !== this.value) {
+          this.instance.setData(this.value)
+          console.log(this.instance)
+        }
+      }
+    },
     methods: {
       submit(){
-        this.$store.commit('stepchange',1)
+        this.$form.content = CKEDITOR.instances["#editor1"].getData();
+        htmlspecialchars(this.$form.content)
+        this.$store.commit('stepchange',{n: 0, item:null})
         console.log(this.form)
         axios.post(url,this.form)
         .then((res)=>{
@@ -54,7 +57,7 @@ export default {
       }
     },
     components:{
-      Form
+
     }
 }
 </script>

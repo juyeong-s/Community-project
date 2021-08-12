@@ -1,6 +1,6 @@
 <template>
   <div class="postdetail">
-      <router-link :to="{ name: 'Pagination' }" class="back-btn">목록으로</router-link>
+      <router-link :to="{ name: 'Pagination' }" class="back-btn" @click.native="stepchange(item)">목록으로</router-link>
       <table class="detail-table">
           <tbody>
               <tr class="detail-tr">
@@ -8,21 +8,21 @@
               </tr>
               <hr>
               <tr class="detail-tr">
-                    <td class="detail-td">{{ item.title }}</td>
+                    <td class="detail-td">{{ $route.params.item.title }}</td>
               </tr>
               <tr class="detail-tr">
                     <th class="detail-th">내용</th>                 
               </tr>
               <hr>
               <tr class="detail-tr">
-                    <td class="detail-td">{{ item.content }}</td>
+                    <td class="detail-td">{{ $route.params.item.content }}</td>
               </tr>
               <tr class="detail-tr">
                     <th class="detail-th">작성일</th>
               </tr>
               <hr>
               <tr class="detail-tr">
-                    <td class="detail-td">{{ item.created_dt }}</td>
+                    <td class="detail-td">{{ $route.params.item.created_dt }}</td>
               </tr>
           </tbody>
       </table>
@@ -35,6 +35,11 @@ export default {
     props: {
         item: Object,
     },
+    methods:{
+        stepchange(){
+            this.$store.commit("stepchange",{n: 0, item:null});
+        }
+    }
 }
 
 </script>

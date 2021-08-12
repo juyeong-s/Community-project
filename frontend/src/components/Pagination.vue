@@ -1,5 +1,6 @@
 <template>
   <div class="overflow-auto">
+    qkqh
   <div>
     <label for="search">🔍</label>
     <input v-model="search" type="text" @input="searchkeyword($event.target.value)" class="search-input" placeholder="검색">
@@ -22,6 +23,9 @@
           <b>{{item.title}}</b>
         </router-link>
       </template>
+      <template v-slot:cell(content)="{ item }">
+          <p>{{item.content}}</p>
+      </template>
     </b-table>
     <div class="mt-3 paging">
       <b-pagination
@@ -37,6 +41,7 @@
 <script>
 let url = "http://127.0.0.1:8000/community/viewcnt_save/";
   export default {
+    name: 'Pagination',
     data() {
       return {
         perPage: 10,
@@ -80,11 +85,13 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
       }
     },
     props:{
-        postlist: Array
+        postlist: Array,
+        userlist: Array
     },
     methods:{
       // 조회수 함수
         viewCountIncre(item){
+          this.$store.commit("stepchange",{n: 1, item:item});
           console.log("viewCountIncre실행됨",item)
           item.view_cnt += 1;
           console.log(this.postlist)
@@ -112,8 +119,10 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
             this.searchedData = [...this.postlist]
           }
           console.log("searchedData",this.searchedData)
+        },
+        displaycontent(item2){
+          return CKEditor.instances.editor1.getData()
         }
-
     },
     computed: {
       // 전체 게시물 개수

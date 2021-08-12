@@ -1,11 +1,11 @@
 <template>
     <div>  
        <div v-if="$store.state.step == 0">
-           <router-link :to="{ name: 'PostForm'}" @click.native="changepage" class="link-form"><v-icon>mdi-pencil</v-icon></router-link>
+           바보
+           <router-link :to="{ name: 'PostForm'}" @click.native="changepage" class="link-form">✏</router-link>
            <div>
                <!-- Postlist Page -->
-               <router-view :postlist="postlist" :userlist="userlist"
-               />
+               <router-view :postlist="postlist" :userlist="userlist"/>
            </div>
        </div>
        
@@ -22,9 +22,10 @@
 
 <script>
 import PostDetail from './PostDetail.vue'
-import PostList from './PostList.vue'
+// import PostList from './PostList.vue'
 import PostForm from './PostForm.vue'
-import Search from './Search.vue'
+import Pagination from './Pagination.vue'
+// import Search from './Search.vue'
 import store from '../store';
 
 export default {
@@ -36,8 +37,9 @@ export default {
     components:{
         PostForm,
         PostDetail,
-        PostList,
-        Search
+        Pagination
+        // PostList,
+        // Search
     },
     methods:{
         changepage(){

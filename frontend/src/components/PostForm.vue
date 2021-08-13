@@ -50,7 +50,7 @@ export default {
         this.$form.content = CKEDITOR.instances["#editor1"].getData();
         htmlspecialchars(this.$form.content)
         this.$store.commit('stepchange',{n: 0, item:null})
-        // console.log(this.form)
+        console.log(this.form)
         axios.post(url,this.form)
         .then((res)=>{
           console.log(res);

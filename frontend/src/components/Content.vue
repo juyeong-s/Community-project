@@ -21,7 +21,6 @@
 
 <script>
 import PostDetail from './PostDetail.vue'
-// import PostList from './PostList.vue'
 import PostForm from './PostForm.vue'
 import Pagination from './Pagination.vue'
 import store from '../store';

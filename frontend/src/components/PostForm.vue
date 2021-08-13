@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
 <v-form>
-    <v-text-field dense="dense" label="제목" 
+    <v-text-field dense="dense" id="title" label="제목" 
      v-model="form.title" required></v-text-field>
      <v-text-field label="글쓴이(예비)" v-model="form.writer_fk_id"></v-text-field>
-     <ckeditor id="editor1" :value="value"></ckeditor>
+     <ckeditor id="editor1" :value="value" name="editor1"></ckeditor>
     <router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link>
     </v-form>
     <br>
@@ -42,6 +42,11 @@ export default {
     },
     methods: {
       submit(){
+        if(this.form.title === ""){
+          alert("제목을 입력해주세요");
+          document.getElementById('title').focus();
+          return false;
+        }
         this.$form.content = CKEDITOR.instances["#editor1"].getData();
         htmlspecialchars(this.$form.content)
         this.$store.commit('stepchange',{n: 0, item:null})
@@ -58,7 +63,7 @@ export default {
     },
     components:{
 
-    }
+    },
 }
 </script>
 

@@ -1,6 +1,5 @@
 <template>
   <div class="overflow-auto">
-    qkqh
   <div>
     <label for="search">🔍</label>
     <input v-model="search" type="text" @input="searchkeyword($event.target.value)" class="search-input" placeholder="검색">
@@ -92,9 +91,7 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
       // 조회수 함수
         viewCountIncre(item){
           this.$store.commit("stepchange",{n: 1, item:item});
-          console.log("viewCountIncre실행됨",item)
           item.view_cnt += 1;
-          console.log(this.postlist)
           axios.post(url,item)
           .then((res)=>{
             console.log(res);
@@ -107,8 +104,7 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
         searchkeyword(e){
           this.searchedData = [...this.postlist]
           this.search = e;
-          console.log(this.searchedData)
-          console.log(this.search)
+
           for(let i=0; i<this.searchedData.length; i++){
             if(!this.searchedData[i].title.includes(this.search)){
               this.searchedData.splice(i,1);
@@ -118,7 +114,6 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
           if(this.searchedData.length === this.postlist.length){
             this.searchedData = [...this.postlist]
           }
-          console.log("searchedData",this.searchedData)
         },
         displaycontent(item2){
           return CKEditor.instances.editor1.getData()
@@ -127,7 +122,6 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
     computed: {
       // 전체 게시물 개수
       rows() {
-        console.log("this.postlist.length",this.postlist.length)
         return this.postlist.length
       },
     },
@@ -137,8 +131,6 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
           this.searchedData = [...this.postlist]
           this.count+=1
         }
-        console.log("searchedData함수",this.searchedData)
-        console.log("count",this.count)
         return this.searchedData
     }
   }

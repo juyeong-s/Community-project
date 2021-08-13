@@ -24,7 +24,6 @@ import PostDetail from './PostDetail.vue'
 // import PostList from './PostList.vue'
 import PostForm from './PostForm.vue'
 import Pagination from './Pagination.vue'
-// import Search from './Search.vue'
 import store from '../store';
 
 export default {

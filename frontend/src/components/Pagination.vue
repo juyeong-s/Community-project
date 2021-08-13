@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-auto">
-  <div>
+    <div>
     <label for="search">🔍</label>
     <input v-model="search" type="text" @input="searchkeyword($event.target.value)" class="search-input" placeholder="검색">
   </div>

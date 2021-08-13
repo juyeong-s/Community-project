@@ -43,7 +43,7 @@ export default {
             this.search = e.target.value;
             console.log(this.search)
             this.postlist.forEach((post)=>{
-                if(post.title.includes(this.search)){
+                if([post.title, post.content].includes(this.search)){
                     this.searchedData.push(post)
                     console.log(this.searchedData)
                     EventBus.$emit('searchdata',this.searchedData);

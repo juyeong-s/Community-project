@@ -140,7 +140,7 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
   height: 300px;
 }
 .search-input{
-    border: 1px solid black;
+    border: 1px solid rgb(248, 231, 231);
 }
 .title-link{
   color: black;

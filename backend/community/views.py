@@ -1,5 +1,3 @@
-# from django.db.models import deletion
-# from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -18,10 +16,6 @@ def usersearch(postdata, userdata):
 
 
 def getPostlist(request):
-    # users = User.objects.all()
-    # posts = Post.objects.all()
-    # user_list = []
-    # post_list = []
     if request.method == 'GET':
         # users = list(User.objects.values())
         postdata = list(Post.objects.values())
@@ -35,13 +29,9 @@ def getPostlist(request):
 def getUserlist(request):
     # users = User.objects.all()
     if request.method == 'GET':
-        # users = list(User.objects.values())
         postdata = list(Post.objects.values())
         userdata = list(User.objects.values('id','UserID'))
-    # print(users)
 
-    # userdata = list(users)
-    # print(userdata)
     username = usersearch(postdata,userdata)
     return JsonResponse(username, safe=False)
 

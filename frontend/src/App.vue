@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
       <Header class="header"></Header>
       <Content class="content" :postlist="postlist" :userlist="userlist"></Content>
       <Footer class="footer"></Footer>

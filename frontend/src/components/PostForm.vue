@@ -1,20 +1,27 @@
 <template>
   <v-container fluid>
-<v-form>
-    <v-text-field dense="dense" id="title" label="제목" 
-     v-model="form.title" required></v-text-field>
-     <v-text-field label="글쓴이(예비)" v-model="form.writer_fk_id"></v-text-field>
-     <ckeditor id="editor1" :value="value" name="editor1"></ckeditor>
-    <router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link>
-    </v-form>
+  <v-form>
+      <v-text-field dense="dense" id="title" label="제목" 
+       v-model="form.title" required></v-text-field>
+       <v-text-field label="글쓴이(예비)" v-model="form.writer_fk_id"></v-text-field>
+       <ckeditor
+        tag-name="textarea"
+        id="editor1"
+        :v-model="editorData"
+        name="editor1">
+       </ckeditor>
+      <router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link>
+  </v-form>
     <br>
   </v-container>
   
 </template>
 
 <script>
+// import CKEditor from 'ckeditor4-vue';
 import axios from "axios"
 let url = "http://127.0.0.1:8000/community/postsave/"
+// const upload = require('../assets/upload')
 
 export default {
     name: 'PostForm',
@@ -25,21 +32,30 @@ export default {
           writer_fk_id: 0,
           content: '',
         },
-        instance: null
+        editorData: '<p>Content of the editor.</p>',
+        // editorConfig:{
+        //   toolbar: [ [ 'Bold' ] ]
+        // },
       }
+    },
+    mounted(){
+      CKEDITOR.replace( 'editor1', {
+        filebrowserBrowseUrl: '/browser/browse.php',
+        filebrowserUploadUrl: '/uploader/upload.php'
+      });
     },
     props:{
       postlist: Array
     },
-    watch:{
-      value(){
-        let html = this.instance.getData()
-        if (html !== this.value) {
-          this.instance.setData(this.value)
-          console.log(this.instance)
-        }
-      }
-    },
+    // watch:{
+    //   value(){
+    //     let html = this.instance.getData()
+    //     if (html !== this.value) {
+    //       this.instance.setData(this.value)
+    //       console.log(this.instance)
+    //     }
+    //   }
+    // },
     methods: {
       submit(){
         if(this.form.title === ""){
@@ -61,9 +77,9 @@ export default {
 
       }
     },
-    components:{
-
-    },
+    // components:{
+    //   ckeditor: CKEditor.component
+    // },
 }
 </script>
 

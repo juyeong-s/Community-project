@@ -6,7 +6,7 @@
        <v-text-field label="글쓴이(예비)" v-model="form.writer_fk_id"></v-text-field>
        <ckeditor
         tag-name="textarea"
-        id="editor1"
+        class="editor1"
         :v-model="editorData"
         name="editor1">
        </ckeditor>
@@ -22,7 +22,6 @@
 import axios from "axios"
 let url = "http://127.0.0.1:8000/community/postsave/"
 // const upload = require('../assets/upload')
-
 export default {
     name: 'PostForm',
     data: ()=>{
@@ -39,10 +38,10 @@ export default {
       }
     },
     mounted(){
-      CKEDITOR.replace( 'editor1', {
-        filebrowserBrowseUrl: '/browser/browse.php',
-        filebrowserUploadUrl: '/uploader/upload.php'
-      });
+      // CKEDITOR.replace( 'editor1', {
+      //   filebrowserBrowseUrl: '/browser/browse.php',
+      //   filebrowserUploadUrl: '/uploader/upload.php'
+      // });
     },
     props:{
       postlist: Array
@@ -63,18 +62,25 @@ export default {
           document.getElementById('title').focus();
           return false;
         }
-        this.$form.content = CKEDITOR.instances["#editor1"].getData();
-        htmlspecialchars(this.$form.content)
-        this.$store.commit('stepchange',{n: 0, item:null})
-        console.log(this.form)
-        axios.post(url,this.form)
-        .then((res)=>{
-          console.log(res);
-        })
-        .catch((error)=>{
-          console.log("err", error.response)
-        });
-
+        else{
+          try{
+            console.log(CKEDITOR.instances["editor1"])
+            this.$form.content = CKEDITOR.instances.getData();
+            htmlspecialchars(this.$form.content)
+            this.$store.commit('stepchange',{n: 0, item:null})
+            console.log(this.form)
+            axios.post(url,this.form)
+            .then((res)=>{
+              console.log(res);
+            })
+            .catch((error)=>{
+              console.log("err", error.response)
+            });
+          }
+          catch(error){
+            console.log(error);
+          }
+        }
       }
     },
     // components:{
@@ -88,5 +94,4 @@ export default {
     overflow-y: scroll;
     height: 400px;
 } */
-
 </style>

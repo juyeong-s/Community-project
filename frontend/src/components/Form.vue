@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ckeditor v-model="postlist"></ckeditor>
+
   </div>
 </template>
 

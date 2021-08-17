@@ -23,7 +23,7 @@
         </router-link>
       </template>
       <template v-slot:cell(content)="{ item }">
-          <p>{{item.content}}</p>
+          <p v-html="item.content">{{item.content}}</p>
       </template>
     </b-table>
     <div class="mt-3 paging">

@@ -15,7 +15,7 @@
               </tr>
               <hr>
               <tr class="detail-tr">
-                    <td class="detail-td">{{ $route.params.item.content }}</td>
+                    <td class="detail-td" v-html="$route.params.item.content">{{ $route.params.item.content }}</td>
               </tr>
               <tr class="detail-tr">
                     <th class="detail-th">작성일</th>

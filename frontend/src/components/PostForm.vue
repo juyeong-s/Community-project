@@ -5,9 +5,8 @@
        v-model="form.title" required></v-text-field>
        <v-text-field label="글쓴이(예비)" v-model="form.writer_fk_id"></v-text-field>
        <ckeditor
-        tag-name="textarea"
-        class="editor1"
-        :v-model="editorData"
+        id="content"
+        :v-model="form.content"
         name="editor1">
        </ckeditor>
       <router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link>
@@ -18,7 +17,7 @@
 </template>
 
 <script>
-// import CKEditor from 'ckeditor4-vue';
+import CKEditor from 'ckeditor4-vue';
 import axios from "axios"
 let url = "http://127.0.0.1:8000/community/postsave/"
 // const upload = require('../assets/upload')
@@ -31,30 +30,26 @@ export default {
           writer_fk_id: 0,
           content: '',
         },
-        editorData: '<p>Content of the editor.</p>',
+        editorData: '',
         // editorConfig:{
         //   toolbar: [ [ 'Bold' ] ]
         // },
       }
     },
-    mounted(){
-      // CKEDITOR.replace( 'editor1', {
-      //   filebrowserBrowseUrl: '/browser/browse.php',
-      //   filebrowserUploadUrl: '/uploader/upload.php'
-      // });
+    updated(){
+      CKEDITOR.replace( 'editor1', {
+        filebrowserBrowseUrl: '/browser/browse.php',
+        filebrowserUploadUrl: '/uploader/upload.php'
+      });
     },
     props:{
       postlist: Array
     },
-    // watch:{
-    //   value(){
-    //     let html = this.instance.getData()
-    //     if (html !== this.value) {
-    //       this.instance.setData(this.value)
-    //       console.log(this.instance)
-    //     }
-    //   }
-    // },
+    watch:{
+      value: function(){
+        this.form.content = this.value;
+      }
+    },
     methods: {
       submit(){
         if(this.form.title === ""){
@@ -64,9 +59,10 @@ export default {
         }
         else{
           try{
-            console.log(CKEDITOR.instances["editor1"])
-            this.$form.content = CKEDITOR.instances.getData();
-            htmlspecialchars(this.$form.content)
+            console.log(this.form.content)
+            console.log(CKEDITOR.instances['content'])
+            // this.form.content = CKEDITOR.instances['content']['_'].getData();
+            // htmlspecialchars(this.form.content)
             this.$store.commit('stepchange',{n: 0, item:null})
             console.log(this.form)
             axios.post(url,this.form)
@@ -83,9 +79,9 @@ export default {
         }
       }
     },
-    // components:{
-    //   ckeditor: CKEditor.component
-    // },
+    components:{
+      ckeditor: CKEditor.component
+    },
 }
 </script>
 

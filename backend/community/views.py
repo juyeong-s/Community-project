@@ -5,6 +5,7 @@ import json
 from django.views.decorators.http import require_POST
 from .models import Post
 from .models import User
+from django.shortcuts import redirect
 
 def usersearch(postdata, userdata):
     username = []
@@ -86,3 +87,9 @@ def pagedpostlist(request, id):
         post = paginator.page(paginator.num_pages)
         print(3)
     return HttpResponse(post)
+
+@csrf_exempt
+def postdelete(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+    return HttpResponse({})

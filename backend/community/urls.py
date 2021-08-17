@@ -7,5 +7,6 @@ urlpatterns = [
     path('postsave/', views.postsave, name='postsave'),
     path('viewcnt_save/', views.viewcnt_save, name='viewcnt_save'),
     path('pagedpostlist/<int:id>', views.pagedpostlist, name='pagedpostlist'),
+    path('postdelete/<int:id>', views.postdelete, name='postdelete'),
     
 ]

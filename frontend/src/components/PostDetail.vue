@@ -26,10 +26,13 @@
               </tr>
           </tbody>
       </table>
+      <button @click="editPost">수정</button>
+      <button @click="deletePost">삭제</button>
   </div>
 </template>
 
 <script>
+import axios from "axios"
 export default {
     name: 'PostDetail',
     props: {
@@ -38,6 +41,27 @@ export default {
     methods:{
         stepchange(){
             this.$store.commit("stepchange",{n: 0, item:null});
+        },
+        editPost(){
+
+        },
+        deletePost(){
+            if(confirm("삭제하시겠습니까?")){
+                console.log(this.$route.params.item.id)
+                axios.delete('http://127.0.0.1:8000/community/postdelete/'+this.$route.params.item.id)
+                .then((res)=>{
+                    console.log(res)
+                    // if(res.data.result){
+                    //     alert("삭제되었습니다.");
+                    // }
+                    // else{
+                    //     alert("삭제에 실패했습니다. 다시 시도해주세요.");
+                    // }
+                })
+                .catch((err)=>{
+                    console.log(err);
+                })
+            }
         }
     }
 }

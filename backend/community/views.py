@@ -93,3 +93,8 @@ def postdelete(request, id):
     post = Post.objects.get(id=id)
     post.delete()
     return HttpResponse({})
+
+def uploadImg(request, id):
+    data = request.body.decode('utf-8')
+    print(data)
+    return HttpResponse(data)

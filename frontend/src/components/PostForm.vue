@@ -39,12 +39,12 @@ export default {
     data: ()=>{
       return {
         form: {
+          id: 0,
           title: '',
           writer_fk_id: 0,
           content: '',
         },
         content_info: null,
-        // editdata:this.$route.query,
         editorData: '',
         // editorConfig:{
         //   toolbar: [ [ 'Bold' ] ]
@@ -62,11 +62,11 @@ export default {
       });
     },
     mounted(){
-      // console.log(this.$route.query.forms)
+      // 수정을 위한 
+      this.form.id = this.$route.query.forms.id;
       this.form.title = this.$route.query.forms.title;
       this.form.content = this.$route.query.forms.content;
       this.form.writer_fk_id = this.$route.query.forms.writer_fk_id;
-      // CKEDITOR.instances["ckcontent"].setData('<p>'+this.form.content+'</p>');
       console.log(this.form.content)
     },
     props:{

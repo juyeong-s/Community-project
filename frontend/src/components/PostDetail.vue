@@ -38,6 +38,7 @@ export default {
     props: {
         item: Object,
         form: {
+          id: 0,
           title: '',
           writer_fk_id: 0,
           content: '',
@@ -74,14 +75,6 @@ export default {
             }
         }
     },
-    // mounted(){
-    //     console.log(this.$route.params.item)
-    //     this.form.title = this.$route.params.item.title;
-    //     this.form.content = this.$route.params.item.content;
-    //     this.form.writer_fk_id = this.$route.params.item.writer_fk_id;
-    //     this.form.created_dt = this.$route.params.item.created_dt;
-    //     console.log(this.form)
-    // }
 }
 
 </script>

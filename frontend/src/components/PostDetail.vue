@@ -1,6 +1,6 @@
 <template>
   <div class="postdetail">
-      <router-link :to="{ name: 'Pagination' }" class="back-btn" @click.native="stepchange(item)">목록으로</router-link>
+      <router-link :to="{ name: 'Pagination' }" class="back-btn" @click.native="stepchange">목록으로</router-link>
       <table class="detail-table">
           <tbody>
               <tr class="detail-tr">
@@ -43,20 +43,22 @@ export default {
             this.$store.commit("stepchange",{n: 0, item:null});
         },
         editPost(){
-
+            this.$store.commit("stepchange",{n: 2, item:this.$route.params.item});
+            this.$router.push({name: 'PostForm', query: this.$route.params.item})         
         },
         deletePost(){
             if(confirm("삭제하시겠습니까?")){
-                console.log(this.$route.params.item.id)
                 axios.delete('http://127.0.0.1:8000/community/postdelete/'+this.$route.params.item.id)
                 .then((res)=>{
                     console.log(res)
-                    // if(res.data.result){
-                    //     alert("삭제되었습니다.");
-                    // }
-                    // else{
-                    //     alert("삭제에 실패했습니다. 다시 시도해주세요.");
-                    // }
+                    if(res){
+                        alert("삭제되었습니다.");
+                        this.$store.commit("stepchange",{n: 0, item:null});
+                        this.$router.push({path: 'list/', query: this.$route.params.item})         
+                    }
+                    else{
+                        alert("삭제에 실패했습니다. 다시 시도해주세요.");
+                    }
                 })
                 .catch((err)=>{
                     console.log(err);

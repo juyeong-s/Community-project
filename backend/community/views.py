@@ -40,10 +40,20 @@ def getUserlist(request):
 @require_POST   # POST 메서드로 접근 시에만 동작
 def postsave(request):
     print(123)
+    
     if request.body:
         data = request.body.decode('utf-8')
         post = json.loads(data)
-
+        id = post['id']
+        # 수정 시
+        if Post.objects.filter(id=id).exists():
+            posts = Post.objects.get(id=id)
+            posts.title = post['title']
+            posts.content = post['content']
+            posts.writer_fk_id = post['writer_fk_id']
+            posts.save()
+            return HttpResponse('Edit success')
+        # post 올릴 시
         title = post['title']
         writer_fk_id = post['writer_fk_id']
         content = post['content']
@@ -52,7 +62,7 @@ def postsave(request):
         posts = Post(title=title, writer_fk=user, content=content)
         posts.save()
 
-    return HttpResponse('success')
+    return HttpResponse('Save success')
 
 @csrf_exempt
 @require_POST

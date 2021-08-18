@@ -26,6 +26,14 @@ import CKEditor from 'ckeditor4-vue';
 import axios from "axios"
 let url = "http://127.0.0.1:8000/community/postsave/"
 // const upload = require('../assets/upload')
+// CKEDITOR.replace( 'ckcontent', {
+//         // toolbar:
+//         // [['Bold','-','italic']],
+//         uiColor: '#dcdcdc',
+//         content: '',
+//         filebrowserBrowseUrl: 'http://127.0.0.1:8000/community/uploadImg/1',
+//         filebrowserUploadUrl: 'http://127.0.0.1:8000/community/uploadImg/1'
+//       });
 export default {
     name: 'PostForm',
     data: ()=>{
@@ -43,24 +51,24 @@ export default {
         // },
       }
     },
-    mounted(){
+    updated(){
       CKEDITOR.replace( 'ckcontent', {
         // toolbar:
         // [['Bold','-','italic']],
+        content: this.form.content,
         uiColor: '#dcdcdc',
         filebrowserBrowseUrl: 'http://127.0.0.1:8000/community/uploadImg/1',
         filebrowserUploadUrl: 'http://127.0.0.1:8000/community/uploadImg/1'
       });
     },
-    // updated(){
-    //   CKEDITOR.replace( 'ckcontent', {
-    //     // toolbar:
-    //     // [['Bold','-','italic']],
-    //     // uiColor: '#FFF3',
-    //     filebrowserBrowseUrl: '/browser/browse.php',
-    //     filebrowserUploadUrl: '/uploader/upload.php'
-    //   });
-    // },
+    mounted(){
+      // console.log(this.$route.query.forms)
+      this.form.title = this.$route.query.forms.title;
+      this.form.content = this.$route.query.forms.content;
+      this.form.writer_fk_id = this.$route.query.forms.writer_fk_id;
+      // CKEDITOR.instances["ckcontent"].setData('<p>'+this.form.content+'</p>');
+      console.log(this.form.content)
+    },
     props:{
       postlist: Array
     },

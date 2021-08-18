@@ -37,24 +37,32 @@ export default {
     name: 'PostDetail',
     props: {
         item: Object,
+        form: {
+          title: '',
+          writer_fk_id: 0,
+          content: '',
+          created_dt: ''
+        },
     },
     methods:{
         stepchange(){
             this.$store.commit("stepchange",{n: 0, item:null});
         },
         editPost(){
-            this.$store.commit("stepchange",{n: 2, item:this.$route.params.item});
-            this.$router.push({name: 'PostForm', query: this.$route.params.item})         
+            const forms = this.$route.params.item;
+            this.$store.commit("stepchange",{n: 2, item:forms});
+            console.log(forms)
+            this.$router.push({name: 'PostForm', query: {forms: forms} });
         },
         deletePost(){
             if(confirm("삭제하시겠습니까?")){
                 axios.delete('http://127.0.0.1:8000/community/postdelete/'+this.$route.params.item.id)
                 .then((res)=>{
-                    console.log(res)
+                    console.log(res);
                     if(res){
                         alert("삭제되었습니다.");
                         this.$store.commit("stepchange",{n: 0, item:null});
-                        this.$router.push({path: 'list/', query: this.$route.params.item})         
+                        this.$router.push({path: 'list/', query: this.$route.params.item});       
                     }
                     else{
                         alert("삭제에 실패했습니다. 다시 시도해주세요.");
@@ -65,7 +73,15 @@ export default {
                 })
             }
         }
-    }
+    },
+    // mounted(){
+    //     console.log(this.$route.params.item)
+    //     this.form.title = this.$route.params.item.title;
+    //     this.form.content = this.$route.params.item.content;
+    //     this.form.writer_fk_id = this.$route.params.item.writer_fk_id;
+    //     this.form.created_dt = this.$route.params.item.created_dt;
+    //     console.log(this.form)
+    // }
 }
 
 </script>

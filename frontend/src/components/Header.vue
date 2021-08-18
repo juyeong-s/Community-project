@@ -16,8 +16,8 @@ export default {
 .head{
     text-align: center;
     margin: 0 auto;
-    background-color: rgb(253, 205, 150);
-    color: rgb(102, 102, 102);
+    background-color: #92caff;
+    color: rgb(255, 255, 255);
 }
 
 </style>

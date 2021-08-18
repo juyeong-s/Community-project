@@ -91,7 +91,7 @@ export default {
 
 .footer{
   font-family: 'Ubuntu', sans-serif;
-  background-color: rgb(253, 205, 150);
+  background-color: #92caff;
   width: 100%;
   height: 60px;
   margin: 1% auto;

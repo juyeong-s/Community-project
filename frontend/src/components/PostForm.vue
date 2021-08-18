@@ -1,19 +1,21 @@
 <template>
   <v-container fluid>
     <router-link :to="{ name: 'Pagination' }" class="back-btn" @click.native="stepchange">목록으로</router-link>
-  <v-form>
+  <form id="PostSaveForm" name="PostSaveForm" enctype="multipart/form-data">
       <v-text-field dense="dense" id="title" label="제목" 
        v-model="form.title" required></v-text-field>
        <v-text-field label="글쓴이(예비)" v-model="form.writer_fk_id"></v-text-field>
+       
        <ckeditor
        tag_name="textarea"
-        id="content"
+        id="ckcontent"
         :v-model="form.content"
-        @change="contentsave($event.target.value)"
-        name="editor1">
+        @input="contentsave($event.target.value)"
+        name="ckcontent">
        </ckeditor>
-      <router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link>
-  </v-form>
+
+      <button type="submit"><router-link to="list/" class="mr-4" @click.native="submit">올리기</router-link></button>
+  </form>
     <br>
   </v-container>
   
@@ -42,14 +44,23 @@ export default {
       }
     },
     mounted(){
-
-    },
-    updated(){
-      CKEDITOR.replace( 'editor1', {
-        filebrowserBrowseUrl: '/browser/browse.php',
-        filebrowserUploadUrl: '/uploader/upload.php'
+      CKEDITOR.replace( 'ckcontent', {
+        // toolbar:
+        // [['Bold','-','italic']],
+        uiColor: '#dcdcdc',
+        filebrowserBrowseUrl: 'http://127.0.0.1:8000/community/uploadImg/1',
+        filebrowserUploadUrl: 'http://127.0.0.1:8000/community/uploadImg/1'
       });
     },
+    // updated(){
+    //   CKEDITOR.replace( 'ckcontent', {
+    //     // toolbar:
+    //     // [['Bold','-','italic']],
+    //     // uiColor: '#FFF3',
+    //     filebrowserBrowseUrl: '/browser/browse.php',
+    //     filebrowserUploadUrl: '/uploader/upload.php'
+    //   });
+    // },
     props:{
       postlist: Array
     },
@@ -69,15 +80,13 @@ export default {
           return false;
         }
         else{
-          this.content_info = this.contentsave()
-          console.log("content_info",this.content_info)
           try{
-            // console.log(this.form.content)
-            // console.log(CKEDITOR.instances['content'])
-            // this.form.content = CKEDITOR.instances['content']['_'].getData();
-            // htmlspecialchars(this.form.content)
+            for(let instance in CKEDITOR.instances){
+              CKEDITOR.instances[instance].updateElement();
+              this.form.content = CKEDITOR.instances[instance].getData();
+              console.log("form.content", this.form.content)
+            }
             this.$store.commit('stepchange',{n: 0, item:null})
-            console.log(this.form)
             axios.post(url,this.form)
             .then((res)=>{
               console.log(res);
@@ -91,9 +100,7 @@ export default {
           }
         }
       },
-      contentsave(e){
-        return e;
-      }
+      
     },
     components:{
       ckeditor: CKEditor.component

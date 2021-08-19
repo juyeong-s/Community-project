@@ -9,4 +9,5 @@ urlpatterns = [
     path('pagedpostlist/<int:id>', views.pagedpostlist, name='pagedpostlist'),
     path('postdelete/<int:id>', views.postdelete, name='postdelete'),
     path('uploadImg/<int:id>', views.uploadImg, name='uploadImg'),
+    path('searchKeyword/<str:keyword>', views.searchKeyword, name='searchKeyword'),
 ]

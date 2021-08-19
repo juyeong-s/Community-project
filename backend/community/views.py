@@ -6,6 +6,8 @@ from django.views.decorators.http import require_POST
 from .models import Post
 from .models import User
 from django.shortcuts import redirect
+from django.db.models import Q
+from django.core import serializers
 
 def usersearch(postdata, userdata):
     username = []
@@ -108,3 +110,13 @@ def uploadImg(request, id):
     data = request.body.decode('utf-8')
     print(data)
     return HttpResponse(data)
+
+def searchKeyword(request, keyword):
+    if keyword:
+        posts = Post.objects.filter(title__icontains=keyword)
+        postlist = list(posts.values())
+    else:
+        postlist = list(Post.objects.values())
+        postlist.reverse()
+
+    return JsonResponse(postlist, safe=False)

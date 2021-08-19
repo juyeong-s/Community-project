@@ -2,7 +2,8 @@
   <div class="overflow-auto">
   <div>
     <label for="search">🔍</label>
-    <input v-model="search" type="text" @input="searchkeyword($event.target.value)" class="search-input" placeholder="검색">
+    <input v-model="search" type="text" @keyup.enter="searchkeyword($event.target.value)" class="search-input" placeholder="검색" autocomplete="off">
+    <button class="rerender" @click="rerender">새로고침</button>
   </div>
       <b-table
       id="my-table"
@@ -100,20 +101,28 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
             console.log("err", error.response)
           });
         },
+        keyword(e){
+          return e;
+        },
         // 검색함수
         searchkeyword(e){
-          this.searchedData = [...this.postlist]
-          this.search = e;
-
-          for(let i=0; i<this.searchedData.length; i++){
-            if(!this.searchedData[i].title.includes(this.search)){
-              this.searchedData.splice(i,1);
-              i--;
-            }
-          }
-          if(this.searchedData.length === this.postlist.length){
-            this.searchedData = [...this.postlist]
-          }
+          let keyword = e;
+          console.log(keyword)
+          const posturl = "http://127.0.0.1:8000/community/searchKeyword/"+keyword;
+           axios({
+            method: "GET",
+            url: posturl 
+          })
+          .then(response => {
+            this.searchedData = response.data;
+            console.log(this.searchedData) 
+          })
+          .catch(response => {
+            console.log("Failed", response);
+          });
+        },
+        rerender(){
+          this.searchedData = this.postlist
         },
         displaycontent(item2){
           return CKEditor.instances.editor1.getData()
@@ -139,8 +148,22 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
 .table-td{
   height: 300px;
 }
-.search-input{
-    border: 1px solid rgb(248, 231, 231);
+.search-input:-ms-clear{
+  display: none;
+  border: 1px solid rgb(248, 231, 231);
+}
+.searchclear {
+  position: absolute;
+  right: 6px;
+  top: 7px;
+  bottom: 15px;
+  width: 10px;
+  height: 14px;
+  margin: auto;
+  font-size: 15px;
+  cursor: pointer;
+  color: #ccc;
+  background-color: #fff;
 }
 .title-link{
   color: black;
@@ -150,4 +173,22 @@ let url = "http://127.0.0.1:8000/community/viewcnt_save/";
   text-align: center;
   margin: 0 auto;
 }
+.rerender{
+  float: right;
+}
 </style>
+
+    // <button @click="searchkeyword">검색하기</button>
+
+              // this.searchedData = [...this.postlist]
+          // this.search = e;
+
+          // for(let i=0; i<this.searchedData.length; i++){
+          //   if(!this.searchedData[i].title.includes(this.search)){
+          //     this.searchedData.splice(i,1);
+          //     i--;
+          //   }
+          // }
+          // if(this.searchedData.length === this.postlist.length){
+          //   this.searchedData = [...this.postlist]
+          // }

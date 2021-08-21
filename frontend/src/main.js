@@ -10,7 +10,8 @@ import VueMoment from 'vue-moment'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import CKEditor from 'ckeditor4-vue';
+// import CKEditor from 'ckeditor4-vue';
+import CKEditor from '@ckeditor/ckeditor5-vue2'
 
 Vue.use( CKEditor );
 Vue.use(VueMoment);

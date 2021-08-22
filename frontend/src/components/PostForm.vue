@@ -38,14 +38,14 @@
 </template>
 
 <script>
-// import CKEditor from 'ckeditor4-vue';
-import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+import CKEditor from "ckeditor4-vue";
+// import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
 // import EssentialsPlugin from "@ckeditor/ckeditor5-essentials/src/essentials";
 // import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold";
 // import ItalicPlugin from "@ckeditor/ckeditor5-basic-styles/src/italic";
 // import LinkPlugin from "@ckeditor/ckeditor5-link/src/link";
 // import ParagraphPlugin from "@ckeditor/ckeditor5-paragraph/src/paragraph";
-import CKEditor from "@ckeditor/ckeditor5-vue2";
+// import CKEditor from "@ckeditor/ckeditor5-vue2";
 // import CKEditor from '@ckeditor/ckeditor5-vue'
 // import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 // import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
@@ -64,7 +64,7 @@ export default {
   name: "PostForm",
   data: () => {
     return {
-      editor: ClassicEditor,
+      // editor: ClassicEditor,
       form: {
         id: 0,
         title: "",
@@ -72,9 +72,6 @@ export default {
         content: "",
       },
       editorData: "",
-      // editorConfig:{
-      //   toolbar: [ [ 'Bold' ] ]
-      // },
     };
   },
   updated() {
@@ -98,11 +95,6 @@ export default {
   props: {
     postlist: Array,
   },
-  // watch:{
-  //   value: function(){
-  //     this.form.content = this.value;
-  //   }
-  // },
   methods: {
     stepchange() {
       this.$store.commit("stepchange", { n: 0, item: null });
@@ -141,10 +133,6 @@ export default {
 </script>
 
 <style>
-/* .v-textarea{
-    overflow-y: scroll;
-    height: 400px;
-} */
 ckeditor {
   background-color: blue;
 }
